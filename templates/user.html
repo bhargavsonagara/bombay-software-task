@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}User{% endblock %}
+{% block header_content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">User</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    {% endblock %}
+    {% block content %}
+    {% for message in messages|slice:":1" %}
+    <div class="alert {{ message.tags }} django messages" role="alert">
+        <span aria-hidden="true" class="closebtn">&times;</span>
+        <span class="django-child-message">{{ message }}</span>
+    </div>
+    {% endfor %}
+    <div class="w-100 messages" role="alert">
+        <span aria-hidden="true" class="closebtn">×</span>
+        <span class="child-message"><strong>Warning!</strong> <span>Password cannot be blank</span></span>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Users</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Dob</th>
+                                        <th>Gender</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for value in data %}
+                                    <tr>
+                                        <td style="text-transform: capitalize;">
+                                            {{ value.first_name }} {{value.last_name }}
+                                        </td>
+                                        <td>{{ value.email }}</td>
+                                        <td>{{ value.mobile }}</td>
+                                        <td>{{ value.dob }}</td>
+                                        <td>{{ value.gender}}</td>
+                                        <td>{{ value.user_type}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<!-- Page specific script -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $('.card-body').append(`<div class="custom-pagination" style="position:relative; top:13px;"><ul class="pagination" style="justify-content: right;"></ul></div>`)
+    pagination_data = JSON.parse(`{{pagination_data|safe}}`)
+    if(pagination_data[0]['page_obj_has_previous']){
+        $('.pagination').append(`<li class="paginate_button page-item previous" id="example1_previous"><a href="?page=${pagination_data[0]['previous_page_number']}" aria-controls="example1" data-dt-idx="${pagination_data[0]['previous_page_number']}" tabindex="0" class="page-link">Previous</a></li>`)
+    }else{
+        $('.pagination').append(`<li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="" tabindex="0" class="page-link">Previous</a></li>`)
+    }
+    $.each(pagination_data[0]['page_list'], function (value) {
+        value = value+1
+        console.log(pagination_data[0]['page_obj_number'], value)
+        if(pagination_data[0]['page_obj_number'] == value){
+            $('.pagination').append(`<li class="paginate_button page-item active"><a href="?page=${value}" aria-controls="example1" data-dt-idx="${value}" tabindex="0" class="page-link">${value}</a></li>`)
+        }else if(value!=0){
+            $('.pagination').append(`<li class="paginate_button page-item"><a href="?page=${value}" aria-controls="example1" data-dt-idx="${value}" tabindex="0" class="page-link">${value}</a></li>`)
+        }
+    })
+    if(pagination_data[0]['page_obj_has_next']){
+        $('.pagination').append(`<li class="paginate_button page-item next" id="example1_next"><a href="?page=${pagination_data[0]['page_obj_next_page_number']}" aria-controls="example1" data-dt-idx="${pagination_data[0]['page_obj_next_page_number']}" tabindex="0" class="page-link">Next</a></li>`)
+    }else{
+        $('.pagination').append(`<li class="paginate_button page-item next disabled" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="" tabindex="0" class="page-link">Next</a></li>`)
+    }
+</script>
+</body>
+
+</html>
+{% endblock %}

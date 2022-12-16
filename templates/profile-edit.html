@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block header_content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit Profile</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block content %}
+    <section class="content">
+        <div class="container-fluid">
+            <form method="POST" enctype="multipart/form-data" action=''>
+                {% csrf_token %}
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3></h3>
+                    </div>
+                    <form>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="categories_name">First Name</label>
+                                {{form.first_name}}
+                                <small>
+                                    {{ form.first_name.errors }}
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="categories_name">Last Name </label>
+                                {{form.last_name}}
+                                <small>
+                                    {{ form.last_name.errors }}
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="categories_name">DOB </label>
+                                {{form.dob}}
+                                <small>
+                                    {{ form.dob.errors }}
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="categories_name">Gender</label>
+                                {{form.gender}}
+                                <small>
+                                    {{ form.gender.errors }}
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="categories_name">Email </label>
+                                {{form.email}}
+                                <small>
+                                    {{ form.email.errors }}
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="categories_name">Mobile </label>
+                                {{form.mobile}}
+                                <small>
+                                    {{ form.mobile.errors }}
+                                </small>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </form> <!-- </div>
+    </div> -->
+
+        </div>
+    </section>
+    {% endblock %}
+
+    {% block scriptblock %}
+<script>
+    flatpickr('#id_dob', { dateFormat: 'm/d/Y' });
+    $(function () {
+        var url = window.location;
+        // for single sidebar menu
+        $('ul.nav-sidebar a').filter(function () {
+            return this.href == url;
+        }).addClass('active');
+
+        // for sidebar menu and treeview
+        $('ul.nav-treeview a').filter(function () {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview")
+            .css({ 'display': 'block' })
+            .addClass('menu-open').prev('a')
+            .addClass('active');
+    });
+
+    $('#id_gender').addClass('row col-12 col-sm-6 col-xs-12')
+    $('#id_gender').css('justify-content', 'flex-start')
+    $('#id_gender').children().css('margin-right', '17px')
+</script>
+{% endblock %}

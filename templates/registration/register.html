@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="/static/github-alt.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="/static/register-style.css">
+
+</head>
+
+<body>
+  <div class="main-block">
+    <h1>Registration</h1>
+    <form method="POST" enctype="multipart/form-data" action=''>
+      {% csrf_token %}
+      <hr>
+      {{form.first_name}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fas fa-user"></i></label>
+      <small>
+        {{ form.first_name.errors }}
+      </small>
+      {{form.last_name}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fas fa-user"></i></label>
+      <small>
+        {{ form.last_name.errors }}
+      </small>
+      {{form.email}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fas fa-envelope"></i></label>
+      <small>
+        {{ form.email.errors }}
+      </small>
+      {{form.mobile}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fa fa-phone"></i></label>
+      <small>
+        {{ form.mobile.errors }}
+      </small>
+      <div>
+        {{ form.dob}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fa fa-calendar"></i></label>
+      </div>
+      <small>
+        {{ form.dob.errors }}
+      </small>
+      {{form.user_type}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fa fa-check"></i></label>
+      <small>
+        {{ form.user_type.errors }}
+      </small>
+      {{form.gender}}
+      <small>
+        {{ form.gender.errors }}
+      </small>
+      {{form.password}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fas fa-lock"></i></label>
+      <small>
+        {{ form.password.errors }}
+      </small>
+      {{form.confirm_password}}<label id="icon" for="name" style="margin-left: 3px;"><i class="fas fa-lock"></i></label>
+      <small>
+        {{ form.confirm_password.errors }}
+      </small>
+      <hr>
+      <div class="btn-block">
+        <button type="submit">Submit</button>
+        <a href="{% url 'login' %}" class="text-center text-decoration-none">I already have a account</a>
+      </div>
+    </form>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+</script>
+
+</html>
