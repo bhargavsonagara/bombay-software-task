@@ -27,7 +27,7 @@
 > ##### 1. Clone repository
 
 ```sh
-
+git clone https://github.com/bhargavsonagara/bombay-software-task.git
 ```
 
 > ##### 2. If you not having pip,Django let's install
@@ -102,4 +102,5 @@ Like logout user page - http://127.0.0.1:8000/logout/
 - After user successful register email send on user
 - Update password email send
 - Using redis as well as Threading 
+- Added 404 page and 500 internal server error page
 <br />
